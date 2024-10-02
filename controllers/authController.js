@@ -8,7 +8,7 @@ const login = asyncHandler(async(req, res) => {
 
     try {
         const user = await User.login(email, password);
-        const authToken = await User.generateAuthToken();
+        const authToken = await user.generateAuthToken();
 
         res.json({ user, authToken });
     } catch (error) {
@@ -30,7 +30,7 @@ const register = asyncHandler(async(req, res) => {
         user = new User({ firstName, lastName, email, password, iconUri });
         await user.save();
 
-        const authToken = await User.generateAuthToken();
+        const authToken = await user.generateAuthToken();
 
         res.status(201).json({ user, authToken});
     } catch (error) {
